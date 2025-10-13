@@ -1,4 +1,4 @@
-FROM ubuntu:24.10 AS deps
+FROM ubuntu:rolling AS deps
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get upgrade -y \
@@ -10,11 +10,11 @@ FROM deps
 COPY diskmark.sh /usr/bin/diskmark
 VOLUME /disk
 WORKDIR /disk
-ENV TARGET "/disk"
-ENV PROFILE "auto"
-ENV IO "direct"
-ENV DATA "random"
-ENV SIZE 1G
-ENV WARMUP 1
-ENV RUNTIME 5s
+ENV TARGET="/disk"
+ENV PROFILE="auto"
+ENV IO="direct"
+ENV DATA="random"
+ENV SIZE="1G"
+ENV WARMUP="1"
+ENV RUNTIME="5s"
 ENTRYPOINT [ "diskmark" ]
