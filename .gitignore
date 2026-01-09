@@ -1,2 +1,9 @@
+# Docker
 docker/build
 docker/cache
+
+# OS
+.DS_Store
+
+# App
+.*.swp
