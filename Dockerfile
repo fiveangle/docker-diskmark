@@ -1,13 +1,11 @@
-FROM ubuntu:rolling AS deps
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install -y fio \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Use an official base image
+FROM alpine:latest AS deps
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache bash fio linux-firmware-none lsblk
 
 FROM deps
-COPY diskmark.sh /usr/bin/diskmark
+COPY diskmark.sh /usr/local/bin/diskmark
 VOLUME /disk
 WORKDIR /disk
 ENV TARGET="/disk"
